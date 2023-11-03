@@ -6,6 +6,8 @@
 */
 
 #include<iostream>
+#include<cstdlib>
+#include<ctime>
 
 using namespace std;
 
@@ -13,8 +15,10 @@ int main() {
     // char var used for continuation of game
     char cont = 'c';
 
-    // resets randomization seed
-    srand(time(NULL));
+    // seeds randomization
+    srand(time(0));
+
+    cout << "Welcome to Guess The Number!\n";
 
     // instead of running file for each game
     // allow user to continue playing
@@ -26,8 +30,7 @@ int main() {
         // attempt counter var
         int attempt = 1;
 
-        cout << "\nWelcome to Guess The Number!\n"
-            << "The random number is between 1 and 100.\n\n";
+        cout << "The number is between 1 and 100.\n\n";
 
         // allow user up to 10 attempts
         while(attempt <= 10) {
