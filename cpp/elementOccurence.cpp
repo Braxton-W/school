@@ -1,3 +1,11 @@
+/*
+    This program takes input of integers, stopping when given -1
+    It then checks the occurence of each different number of the array
+    If the occurence is even, it returns 0; odd, returns 1
+
+    Author: Braxton Worsley
+*/
+
 #include<iostream>
 using namespace std;
 
