@@ -23,25 +23,24 @@ int main()
     int array[MAXSIZE];  // array initialization
     int arrMin;          // min value in array
     int arrMax;          // max value in array
-    result = 0;          // set result to 0, even occurence
+    int occur;           // occurence count
     
+    // get initial input; set to min and max
     // get input until -1
     cin >> temp;
     arrMin = temp;
     arrMax = temp;
     for(count = 0; temp != ENDOFLIST; count++) {
+        // find min and max values in array
+        if(temp < arrMin) {
+            arrMin = temp;
+        }
+        if(temp > arrMax) {
+            arrMax = temp;
+        }
+
         array[count] = temp;
         cin >> temp;
-    }
-    
-    // find min and max values in array
-    for(int i = 0; i < count; i++) {
-        if(array[i] < arrMin) {
-            arrMin = array[i];
-        }
-        if(array[i] > arrMax) {
-            arrMax = array[i];
-        }
     }
     
     // if length of array is 1, set result to 1
@@ -49,19 +48,16 @@ int main()
         result = 1;
     }
     
-    // for all values in array, or until result is 1
-    for(int j = 0; result != 1 && j < count; j++) {
-        // check occurence of min array value to max array value
-        for(int curr = arrMin; curr < arrMax; curr++) {
-            // add 1 to result if current value checking
+    // check occurrence of min array value to max array value
+    for(int curr = arrMin; result != 1 && curr <= arrMax; curr++) {
+        // check all array values for current value to check
+        for(int j = 0; j < count; j++) {
             if(array[j] == curr) {
-                result++;
+                occur++;
             }
         }
-        
-        // even or odd occurence
-        result %= 2;
-    }   
+        result = occur % 2;
+    }
     // End of your code
 
     cout << result;
