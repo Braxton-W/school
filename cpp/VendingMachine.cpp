@@ -24,6 +24,10 @@ void PrintMoney(Money x);
 // Note: This will never need to dispense a dollar
 void DispenseChange(int amount);
 
+// Outputs amount left to pay: PRICE - deposit
+// Takes input for next choice and returns choice
+int OutputInput(const int PRICE, int deposit);
+
 int main()
 {
 	// TODO: Write main program code
@@ -43,25 +47,27 @@ int main()
 	cin >> choice;
 
 	// get deposit until choice is 5 or deposit is sufficient
-	for(count = 0; choice != 5 && deposit < PRICE; count++) {
-		Money money = ConvertToMoney(choice);
-		coins[count] = money;
-		deposit += (int)money;
+	for (count = 0; choice != 5 && deposit < PRICE; count++) {
+		while (choice < 1 || choice > 5) {
+			choice = OutputInput(PRICE, deposit);
+		}
 
-		if(deposit < PRICE) {
-			printf("\nAmount left to pay: ");
-			PrintPrice(PRICE - deposit);
-			printf("\nEnter: > ");
+		if (choice != 5) {
+			Money money = ConvertToMoney(choice);
+			coins[count] = money;
+			deposit += (int)money;
 
-			cin >> choice;
+			if (deposit < PRICE) {
+				choice = OutputInput(PRICE, deposit);
+			}
 		}
 	}
 
 	// cancel transaction
-	if(choice == 5) {
+	if (choice == 5) {
 		printf("\nTransaction cancelled.");
 
-		if(deposit > 0) {
+		if (deposit > 0) {
 			printf("\nReturning:\n>> ");
 
 			for (int i = 0; i < count; i++) {
@@ -71,12 +77,15 @@ int main()
 
 		return 0;
 	}
+	
+	// if adequate deposit, dispense soda
+	// if overpaid, dispense change
+	if (deposit >= PRICE) {
+		printf("\nDispensing soda.\n");
 
-	printf("\nDispensing soda.\n");
-
-	// return change
-	if(deposit > PRICE) {
-		DispenseChange(abs(PRICE - deposit));
+		if (deposit > PRICE) {
+			DispenseChange(abs(PRICE - deposit));
+		}
 	}
 
 	cout << endl;
@@ -86,9 +95,6 @@ int main()
 void PrintPrice(int price)
 {
 	// TODO: Write code for the printPrice function
-	// int dollars = price / 100;
-	// int cents = price % 100;
-
 	printf("$%d.%02d", price / 100, price % 100);
 }
 
@@ -100,13 +106,13 @@ void DispenseChange(int amount)
 
 	printf("\nReturning:\n>> ");
 
-	while(amount > 0) {
+	while (amount > 0) {
 		int money;
 
-		if(amount >= (int)Money::quarter) {
+		if (amount >= (int)Money::quarter) {
 			money = 25;
 		}
-		else if(amount >= (int)Money::dime) {
+		else if (amount >= (int)Money::dime) {
 			money = 10;
 		}
 		else {
@@ -122,16 +128,16 @@ void DispenseChange(int amount)
 Money ConvertToMoney(int x)
 {
 	// TODO: Write code for the ConvertToMoney function
-	switch(x) {
-		case 1:
-			return Money::nickel;
-			break;
-		case 2:
-			return Money::dime;
-			break;
-		case 3:
-			return Money::quarter;
-			break;
+	switch (x) {
+	case 1:
+		return Money::nickel;
+		break;
+	case 2:
+		return Money::dime;
+		break;
+	case 3:
+		return Money::quarter;
+		break;
 	}
 
 	return Money::dollar;
@@ -140,17 +146,29 @@ Money ConvertToMoney(int x)
 void PrintMoney(Money x) {
 	// TODO: Write code for the PrintMoney function
 	switch (x) {
-		case Money::dollar:
-			printf("dollar ");
-			break;
-		case Money::quarter:
-			printf("quarter ");
-			break;
-		case Money::dime:
-			printf("dime ");
-			break;
-		case Money::nickel:
-			printf("nickel ");
-			break;
+	case Money::dollar:
+		printf("dollar ");
+		break;
+	case Money::quarter:
+		printf("quarter ");
+		break;
+	case Money::dime:
+		printf("dime ");
+		break;
+	case Money::nickel:
+		printf("nickel ");
+		break;
 	}
+}
+
+int OutputInput(const int PRICE, int deposit) {
+	int choice;
+
+	printf("\nAmount left to pay: ");
+	PrintPrice(PRICE - deposit);
+	printf("\nEnter: > ");
+
+	cin >> choice;
+
+	return choice;
 }
