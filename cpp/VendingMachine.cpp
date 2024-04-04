@@ -110,13 +110,13 @@ void DispenseChange(int amount)
 		int money;
 
 		if (amount >= (int)Money::quarter) {
-			money = 25;
+			money = (int)Money::quarter;
 		}
 		else if (amount >= (int)Money::dime) {
-			money = 10;
+			money = (int)Money::dime;
 		}
 		else {
-			money = 5;
+			money = (int)Money::nickel;
 		}
 
 		PrintMoney((Money)money);
