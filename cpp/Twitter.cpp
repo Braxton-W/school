@@ -4,7 +4,7 @@
 * Tweets can be added, deleted, and liked
 *
 * Authors: Braxton Worsley, Devonte Joyner, Ellyn Hernandez-Rodriguez,
-*		   Faisal Mangal, Jonathan Walthour, Nathan Clifton
+* 	   Faisal Mangal, Jonathan Walthour, Nathan Clifton
 */
 
 #include <iostream>
@@ -124,15 +124,15 @@ int selectTweet(const Tweet timeline[], int usedSize);
 * If selected represents a valid array position, returns true.
 * If selected is not valid, prints "No tweet is selected." and returns false.
 */
-bool validSelection(const int usedSize, const int selected);
+bool isValidSelection(const int usedSize, const int selected);
 
 int main()
 {
 	Tweet timeline[CAPACITY];	// Twitter timeline
-	int choice;					// User's menu choice
-	int usedSize = 0;			// Num of tweets in the timeline
-	int selected = -1;			// Currently selected tweet
-	int tmp;					// Temporary variable
+	int choice;			// User's menu choice
+	int usedSize = 0;		// Num of tweets in the timeline
+	int selected = -1;		// Currently selected tweet
+	int tmp;			// Temporary variable
 
 	// Add some starter entries for testing purposes
 	selected = addTweet(timeline, usedSize, "Where do they get the seeds to plant seedless watermelons?");
@@ -204,7 +204,6 @@ int main()
 
 int doAddTweet(Tweet timeline[], int& usedSize)
 {
-	// TODO: Write code for the function
 	if (usedSize >= CAPACITY) {
 		printf("\nERROR: Timeline is full.\n\n");
 
@@ -226,10 +225,9 @@ int doAddTweet(Tweet timeline[], int& usedSize)
 
 void doEditTweet(Tweet timeline[], int usedSize, int selected)
 {
-	// TODO: Write code for the function
 	printf("\n");
 
-	if (!validSelection(usedSize, selected))
+	if (!isValidSelection(usedSize, selected))
 		return;
 
 	printf("Enter tweet:\n");
@@ -240,10 +238,9 @@ void doEditTweet(Tweet timeline[], int usedSize, int selected)
 
 void doLikeTweet(Tweet timeline[], int usedSize, int selected)
 {
-	// TODO: Write code for the function
 	printf("\n");
 
-	if (!validSelection(usedSize, selected))
+	if (!isValidSelection(usedSize, selected))
 		return;
 
 	timeline[selected].likes++;
@@ -253,7 +250,6 @@ void doLikeTweet(Tweet timeline[], int usedSize, int selected)
 
 void displayTimeline(const Tweet timeline[], int usedSize, int selected)
 {
-	// TODO: Write code for the function
 	printf("Tweets:\n\nSel     ID   Likes   Tweet\n");
 
 	if (usedSize > 0) {
@@ -273,7 +269,6 @@ void displayTimeline(const Tweet timeline[], int usedSize, int selected)
 
 int addTweet(Tweet timeline[], int& usedSize, const char message[])
 {
-	// TODO: Write code for the function
 	if (usedSize >= CAPACITY) {
 		return -1;
 	}
@@ -291,7 +286,6 @@ int addTweet(Tweet timeline[], int& usedSize, const char message[])
 
 int getNextId(Tweet timeline[], int usedSize)
 {
-	// TODO: Write code for the function
 	if (usedSize > 0) {
 		return timeline[usedSize - 1].id + 1;
 	}
@@ -301,10 +295,9 @@ int getNextId(Tweet timeline[], int usedSize)
 
 void doDeleteTweet(Tweet timeline[], int& usedSize, int& selected)
 {
-	// TODO: Write code for the function
 	printf("\n");
 
-	if (!validSelection(usedSize, selected))
+	if (!isValidSelection(usedSize, selected))
 		return;
 
 	for (int i = selected; i < usedSize; i++)
@@ -318,7 +311,6 @@ void doDeleteTweet(Tweet timeline[], int& usedSize, int& selected)
 
 int selectTweet(const Tweet timeline[], int usedSize)
 {
-	// TODO: Write code for the function
 	printf("\n");
 
 	if (usedSize == 0) {
@@ -343,7 +335,7 @@ int selectTweet(const Tweet timeline[], int usedSize)
 	return -1;
 }
 
-bool validSelection(const int usedSize, const int selected)
+bool isValidSelection(const int usedSize, const int selected)
 {
 	if (selected > -1 && selected < usedSize)
 		return true;
