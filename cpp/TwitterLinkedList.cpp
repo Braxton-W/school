@@ -115,10 +115,10 @@ void deleteList(Node*& timeline);
 
 int main()
 {
-	Node* timeline = NULL;    // Twitter timeline
-	int choice;               // User's menu choice
-	Node* selected;           // Currently selected tweet
-	Node* tmp;                // Temporary variable
+	Node* timeline = NULL;		// Twitter timeline
+	int choice;			// User's menu choice
+	Node* selected;			// Currently selected tweet
+	Node* tmp;			// Temporary variable
 
 	// Add some starter entries for testing purposes
 	selected = addTweet(timeline, "Where do they get the seeds to plant seedless watermelons?");
@@ -140,8 +140,7 @@ int main()
 		cin >> choice;
 
 		// Corrects issues where user might enter a non-integer value
-		while (cin.fail())
-		{
+		while (cin.fail()) {
 			cin.clear();
 			cin.ignore((numeric_limits<streamsize>::max)(), '\n');
 			printf("Select: ");
@@ -195,9 +194,11 @@ Node* doAddTweet(Node*& timeline)
 	printf("Enter tweet:\n");
 	cin.getline(message, MSGSIZE);
 
-	// clear input buffer
-	cin.clear();
-	cin.ignore((numeric_limits<streamsize>::max)(), '\n');
+	// input larger than MSGSIZE
+	if (cin.fail()) {
+		cin.clear();
+		cin.ignore((numeric_limits<streamsize>::max)(), '\n');
+	}
 
 	printf("\n");
 
@@ -220,9 +221,11 @@ void doEditTweet(Node* selected)
 	printf("Enter tweet:\n");
 	cin.getline(selected->tweet.msg, MSGSIZE);
 
-	// clear input buffer
-	cin.clear();
-	cin.ignore((numeric_limits<streamsize>::max)(), '\n');
+	// input larger than MSGSIZE
+	if (cin.fail()) {
+		cin.clear();
+		cin.ignore((numeric_limits<streamsize>::max)(), '\n');
+	}
 
 	printf("\n");
 }
@@ -247,7 +250,7 @@ void displayTimeline(Node* timeline, Node* selected)
 	printf("Tweets:\n\nSel     ID   Likes   Tweet\n");
 
 	if (timeline == NULL) {
-		printf("        ***** Empty *****\n");
+		printf("        ***** Empty *****\n\n");
 
 		return;
 	}
@@ -345,7 +348,7 @@ void doDeleteTweet(Node*& timeline, Node*& selected)
 
 Node* selectTweet(Node* timeline)
 {
-  printf("\n");
+	printf("\n");
 
 	if (timeline == NULL) {
 		printf("Timeline is empty.\n\n");
@@ -358,7 +361,7 @@ Node* selectTweet(Node* timeline)
 	printf("Enter ID: ");
 	cin >> id;
 
-	// Corrects issues where user might enter a non-integer value
+	// corrects issues where user might enter a non-integer value
 	while (cin.fail())
 	{
 		cin.clear();
@@ -385,7 +388,7 @@ void deleteList(Node*& timeline)
 		return;
 
 	// recursive cases
-	deleteList(timeline->next);
+	deleteList(timeline);
 
 	// delete as coming back from NULL to head
 	delete timeline->next;
