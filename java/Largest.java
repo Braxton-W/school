@@ -16,6 +16,9 @@ public class Largest {
 				secondLargest = largest;
 				largest = current;
 			}
+			else if(current > secondLargest) {
+				secondLargest = current;
+			}
 		}
 		
 		System.out.println("The largest number entered was " + largest);
