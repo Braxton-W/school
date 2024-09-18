@@ -15,8 +15,8 @@ public class SentenceContains {
 		System.out.println("Word: " + word + "\nSentence: " + sentence);
 		
 		int index = sentence.indexOf(word);
-		
-		// word is in sentence and immediate characters around word are letters
+				
+		// word is in sentence and immediate characters around word are not letters
 		if(index >= 0 && !isLetter(index - 1, sentence) && !isLetter(index + word.length(), sentence)) {
 			System.out.println("The sentence contains the word entered");
 		} else {
@@ -30,12 +30,12 @@ public class SentenceContains {
 		// index is out of bounds
 		if(index < 0 || index >= sentence.length()) {
 			return false;
-		} else {
-			// character is not a letter
-			char c = sentence.charAt(index);
-			if((c >= 'A' || c <= 'Z') || (c >= 'a' || c <= 'z')) {
-				return false;
-			}
+		}
+		
+		// character is not a letter
+		char c = sentence.charAt(index);
+		if((c < 'A' || c > 'Z') && (c < 'a' || c > 'z')) {
+			return false;
 		}
 		
 		return true;
