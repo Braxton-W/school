@@ -1,0 +1,6 @@
+1. Why do you think cloud computing has become so widely adopted?
+2. What stands out about Google Cloud Platform compared to other cloud providers (e.g., AWS, Azure)? Name one GCP service you’re interested in and describe a real or hypothetical use case.
+
+Cloud computing has become so widely adopted as it is more accessible, easily scalable, and efficient. Since the cloud can be accessed from anywhere with an internet connection, this allows for anyone with proper access to do so more easily. Using the cloud, instead of local hardware, is also more easily scalable; making use of another organization's hardware allows you to request more or less resources, without having to buy, install, and set up locally. Cloud computing is more efficient in the way that it saves the users' time and is usually an interval payment rather than a large upfront cost as local hardware may be.
+
+Google Cloud Platform stands out when it comes to speed and efficiency when handling computations and data. I am interested in BigQuery, GCP's data warehouse supported by SQL. While data warehouses can have infinite use cases, a large percentage is commercial-use. Businesses can store and analyze their sales data and even build machine learning models within BigQuery to help them predict future sales.
